@@ -19,8 +19,9 @@ User.hasMany(Restaurant);
 Restaurant.belongsTo(User);
 
 // Reservation Associations via Super Many-to-Many relationship
-User.belongsToMany(Restaurant, { through: Reservation });
-Restaurant.belongsToMany(User, { through: Reservation });
+User.belongsToMany(DiningTable, { through: Reservation });
+DiningTable.belongsToMany(User, { through: Reservation });
+// Restaurant.belongsToMany(Reservation, { through: Reservation });
 Restaurant.hasMany(Reservation);
 Reservation.belongsTo(Restaurant);
 User.hasMany(Reservation);

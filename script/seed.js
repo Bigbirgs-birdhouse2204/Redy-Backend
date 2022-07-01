@@ -22,6 +22,7 @@ async function seed() {
     User.create({ firstName: 'murphy2', lastName: 'Smith', email: 'murphy2@gmail.com', password: '123', phone: '555-555-5555', role: 'customer' }),
   ])
 
+
   // Creating Restaurants
   const restaurants = await Promise.all([
     Restaurant.create({ name: 'test1',address: '123 FakeStreet', }),
@@ -45,14 +46,17 @@ async function seed() {
 
   // Adding Restuarants to Users
 users.map(async (user, index) => await user.addRestaurant(restaurants[index]))
-// await users[1].addReservation(booking);
 
 // Creating Reservations
-const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
-const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
+// const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
+
+await users[1].addReservation({ status: 'WaitList', partySize: 4, });
+// const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
+// const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
+
 // Changing Occupied Dining Table status to Closed
 await DiningTable.update(
-  {status: 'Closed'},
+  {isOccupied: true},
 {where:
 {
   id: res.diningTableId
@@ -87,6 +91,7 @@ const cuisines = await Promise.all([
 //  await booking.addUser(users[1])
 // await users[1].addReservation(booking);
 
+console.log(Object.keys(Reservation.prototype));
 
 
   // console.log(`seeded ${users.length} users`)

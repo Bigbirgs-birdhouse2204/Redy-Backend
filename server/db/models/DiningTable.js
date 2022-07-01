@@ -3,16 +3,14 @@ const db = require('../db');
 
 
 const DiningTable = db.define('diningTable', {
-  status: {
-    type: Sequelize.DataTypes.ENUM('Open', 'Closed'),
-    defaultValue: 'Open',
+  isOccupied: {
+    type: Sequelize.BOOLEAN,
+    // seat is open by default
+    defaultValue: false,
   },
   seats: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    validate: {
-      len: 1,
-    },
   },
 });
 

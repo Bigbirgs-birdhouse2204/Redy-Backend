@@ -14,11 +14,11 @@ const Reservation = db.define('reservation', {
       len: 1,
     },
   },
-  diningTableId: {
-    type: Sequelize.INTEGER,
-    // in cases where a user is on a wait list
-    allowNull: true,
-  }
+  // diningTableId: {
+  //   type: Sequelize.INTEGER,
+  //   // in cases where a user is on a wait list
+  //   allowNull: true,
+  // }
 });
 
 module.exports = Reservation;

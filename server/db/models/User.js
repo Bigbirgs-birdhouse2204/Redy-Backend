@@ -48,7 +48,7 @@ radius: {
   defaultValue: 1,
 },
 role: {
-  type: Sequelize.ENUM('customer', 'restaurant'),
+  type: Sequelize.ENUM('customer', 'restaurant', 'admin'),
   defaultValue: 'customer',
 },
 })
