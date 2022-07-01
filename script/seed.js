@@ -16,8 +16,10 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ firstName: 'cody', lastName: 'Smith', email: 'cody@gmail.com', password: '123', phone: '555-555-5555' }),
-    User.create({ firstName: 'murphy', lastName: 'Smith', email: 'murphy@gmail.com', password: '123', phone: '555-555-5555' }),
+    User.create({ firstName: 'cody', lastName: 'Smith', email: 'cody@gmail.com', password: '123', phone: '555-555-5555', role: 'restaurant' }),
+    User.create({ firstName: 'murphy', lastName: 'Smith', email: 'murphy@gmail.com', password: '123', phone: '555-555-5555', role: 'restaurant' }),
+    User.create({ firstName: 'cody2', lastName: 'Smith', email: 'cody2@gmail.com', password: '123', phone: '555-555-5555', role: 'customer' }),
+    User.create({ firstName: 'murphy2', lastName: 'Smith', email: 'murphy2@gmail.com', password: '123', phone: '555-555-5555', role: 'customer' }),
   ])
 
   // Creating Restaurants
@@ -46,8 +48,8 @@ users.map(async (user, index) => await user.addRestaurant(restaurants[index]))
 // await users[1].addReservation(booking);
 
 // Creating Reservations
-const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 2, restaurantId: 1, diningTableId: 2 })
-const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 1, restaurantId: 2, })
+const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
+const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
 // Changing Occupied Dining Table status to Closed
 await DiningTable.update(
   {status: 'Closed'},
