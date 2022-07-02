@@ -43,13 +43,17 @@ const User = db.define('user', {
         },
     }
 },
-radius: {
-  type: Sequelize.INTEGER,
-  defaultValue: 1,
-},
-role: {
-  type: Sequelize.ENUM('customer', 'restaurant', 'admin'),
-  defaultValue: 'customer',
+// radius: {
+//   type: Sequelize.INTEGER,
+//   defaultValue: 1,
+// },
+// role: {
+//   type: Sequelize.ENUM('customer', 'restaurant', 'admin'),
+//   defaultValue: 'customer',
+// },
+isAdmin: {
+  type: Sequelize.BOOLEAN,
+  defaultValue: false,
 },
 })
 

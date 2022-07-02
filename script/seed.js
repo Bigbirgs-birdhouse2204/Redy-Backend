@@ -1,10 +1,14 @@
 'use strict'
 
-const {db, models: {User,
-  Restaurant,
-  Reservation,
+const {db, models: {
+  Cuisine,
   DiningTable,
-  Cuisine,} } = require('../server/db')
+  Reservation,
+  ReservedSeating,
+  Restaurant,
+  RestaurantOwner,
+  User,
+} } = require('../server/db')
 
 /**
  * seed - this function clears the database, updates tables to
@@ -16,11 +20,21 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ firstName: 'cody', lastName: 'Smith', email: 'cody@gmail.com', password: '123', phone: '555-555-5555', role: 'restaurant' }),
-    User.create({ firstName: 'murphy', lastName: 'Smith', email: 'murphy@gmail.com', password: '123', phone: '555-555-5555', role: 'restaurant' }),
-    User.create({ firstName: 'cody2', lastName: 'Smith', email: 'cody2@gmail.com', password: '123', phone: '555-555-5555', role: 'customer' }),
-    User.create({ firstName: 'murphy2', lastName: 'Smith', email: 'murphy2@gmail.com', password: '123', phone: '555-555-5555', role: 'customer' }),
+    User.create({ firstName: 'cody', lastName: 'Smith', email: 'cody@gmail.com', password: '123', phone: '555-555-5555', isAdmin: true, }),
+    User.create({ firstName: 'murphy', lastName: 'Smith', email: 'murphy@gmail.com', password: '123', phone: '555-555-5555', isAdmin: false, }),
+    User.create({ firstName: 'cody2', lastName: 'Smith', email: 'cody2@gmail.com', password: '123', phone: '555-555-5555', isAdmin: false, }),
+    User.create({ firstName: 'murphy2', lastName: 'Smith', email: 'murphy2@gmail.com', password: '123', phone: '555-555-5555', isAdmin: false, }),
   ])
+
+  // Adding Restaurant Owners
+
+  // Check Magic Methods
+  console.log(Object.keys(User.prototype));
+
+ await users[0].createRestaurantOwner()
+ await users[1].createRestaurantOwner()
+
+let rOwners = await RestaurantOwner.findAll()
 
 
   // Creating Restaurants
@@ -43,26 +57,6 @@ async function seed() {
   await restaurants[1].addDiningTable(diningTables[2])
   await restaurants[1].addDiningTable(diningTables[3])
 
-
-  // Adding Restuarants to Users
-users.map(async (user, index) => await user.addRestaurant(restaurants[index]))
-
-// Creating Reservations
-// const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
-
-await users[1].addReservation({ status: 'WaitList', partySize: 4, });
-// const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
-// const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
-
-// Changing Occupied Dining Table status to Closed
-await DiningTable.update(
-  {isOccupied: true},
-{where:
-{
-  id: res.diningTableId
-}}
-)
-
 // Creating Cuisines
 const cuisines = await Promise.all([
   Cuisine.create({ type: 'pizza', }),
@@ -83,6 +77,27 @@ const cuisines = await Promise.all([
   await restaurants[1].addCuisine(cuisines[5])
   await restaurants[1].addCuisine(cuisines[2])
   await restaurants[1].addCuisine(cuisines[3])
+
+
+  // Adding Restuarants to Users
+  rOwners.map(async (owner, index) => await owner.addRestaurant(restaurants[index]))
+
+// Creating Reservations
+// const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
+
+// await users[1].addReservation({ status: 'WaitList', partySize: 4, });
+// const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
+// const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
+
+// Changing Occupied Dining Table status to Closed
+// await DiningTable.update(
+//   {isOccupied: true},
+// {where:
+// {
+//   id: res.diningTableId
+// }}
+// )
+
 
 // const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
 //  await booking.addRestaurant(restaurants[0]);
