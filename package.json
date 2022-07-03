@@ -29,8 +29,7 @@
     "sequelize": "^6.3.5"
   },
   "engines": {
-    "node": "16.14.2",
-    "npm": "8.5.0"
+    "node": "16.14.2"
   },
   "devDependencies": {
     "axios": "^0.21.1",
