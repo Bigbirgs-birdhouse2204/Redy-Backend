@@ -38,14 +38,14 @@ Restaurant.hasMany(Reservation);
 
 
 
-// Reservation & Dining Table M-M Table Through Reserved Seating
-// Reservation.belongsToMany(DiningTable, { through: ReservedSeating });
-// Reservation.belongsTo(DiningTable, { through: ReservedSeating,
-//   // foreignKey: 'reservationId',
-//   // primaryKey: Reservation.id
-// });
+// Super M-M Reserved Seating Table ft Reservation & Dining Table
+
 DiningTable.belongsToMany(Reservation, { through: ReservedSeating });
 Reservation.belongsToMany(DiningTable, { through: ReservedSeating });
+ReservedSeating.belongsTo(DiningTable);
+ReservedSeating.belongsTo(Reservation);
+DiningTable.hasMany(ReservedSeating);
+Reservation.hasMany(ReservedSeating);
 
 // Restaurant.belongsToMany(Reservation, { through: Reservation });
 // Restaurant.hasMany(Reservation);

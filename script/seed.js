@@ -25,23 +25,25 @@ async function seed() {
     User.create({ firstName: 'cody2', lastName: 'Smith', email: 'cody2@gmail.com', password: '123', phone: '555-555-5555', isAdmin: false, }),
     User.create({ firstName: 'murphy2', lastName: 'Smith', email: 'murphy2@gmail.com', password: '123', phone: '555-555-5555', isAdmin: false, }),
   ])
+  const adminCody = users[0]
+  const rOwnerMurphy = users[1]
+  const customerCody = users[2]
+  const customerMurphy = users[3]
 
   // Adding Restaurant Owners
 
-  // Check Magic Methods
-  console.log(Object.keys(User.prototype));
-
- await users[0].createRestaurantOwner()
- await users[1].createRestaurantOwner()
+ await adminCody.createRestaurantOwner()
+ await rOwnerMurphy.createRestaurantOwner()
 
 let rOwners = await RestaurantOwner.findAll()
-
 
   // Creating Restaurants
   const restaurants = await Promise.all([
     Restaurant.create({ name: 'test1',address: '123 FakeStreet', }),
     Restaurant.create({ name: 'test2',address: '123 FakeStreet',}),
   ])
+  const restaurant1 = restaurants[0]
+  const restaurant2 = restaurants[1]
 
   // Creating Dining Tables
   const diningTables = await Promise.all([
@@ -50,12 +52,17 @@ let rOwners = await RestaurantOwner.findAll()
     DiningTable.create({ seats: 4, }),
     DiningTable.create({ seats: 7,}),
   ])
+  const r1DT1 = diningTables[0]
+  const r1DT2 = diningTables[1]
+  const r2DT1 = diningTables[2]
+  const r2DT2 = diningTables[3]
+
 
   // Adding Dining Tables to Restaurants
-  await restaurants[0].addDiningTable(diningTables[0])
-  await restaurants[0].addDiningTable(diningTables[1])
-  await restaurants[1].addDiningTable(diningTables[2])
-  await restaurants[1].addDiningTable(diningTables[3])
+  await restaurant1.addDiningTable(r1DT1)
+  await restaurant1.addDiningTable(r1DT2)
+  await restaurant2.addDiningTable(r2DT1)
+  await restaurant2.addDiningTable(r2DT2)
 
 // Creating Cuisines
 const cuisines = await Promise.all([
@@ -66,57 +73,70 @@ const cuisines = await Promise.all([
   Cuisine.create({ type: 'Hamburgers',}),
   Cuisine.create({ type: 'Italian',}),
 ])
+const pizza = cuisines[0]
+const latin = cuisines[1]
+const asian = cuisines[2]
+const indian = cuisines[3]
+const hamburgers = cuisines[4]
+const italian = cuisines[5]
 
   // Adding Cuisine Filter Tags to Restaurants
-  await restaurants[0].addCuisine(cuisines[0])
-  await restaurants[0].addCuisine(cuisines[1])
-  await restaurants[1].addCuisine(cuisines[0])
-  await restaurants[0].addCuisine(cuisines[4])
-  await restaurants[1].addCuisine(cuisines[4])
-  await restaurants[0].addCuisine(cuisines[5])
-  await restaurants[1].addCuisine(cuisines[5])
-  await restaurants[1].addCuisine(cuisines[2])
-  await restaurants[1].addCuisine(cuisines[3])
+  await restaurant1.addCuisine(pizza)
+  await restaurant1.addCuisine(latin)
+  await restaurant2.addCuisine(pizza)
+  await restaurant1.addCuisine(hamburgers)
+  await restaurant2.addCuisine(hamburgers)
+  await restaurant1.addCuisine(italian)
+  await restaurant2.addCuisine(italian)
+  await restaurant2.addCuisine(asian)
+  await restaurant2.addCuisine(indian)
 
 
-  // Adding Restuarants to Users
+  // Adding Restuarants to Restaurant Owners
   rOwners.map(async (owner, index) => await owner.addRestaurant(restaurants[index]))
 
 // Creating Reservations
-// const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
 
-// await users[1].addReservation({ status: 'WaitList', partySize: 4, });
-// const res = await Reservation.create({ status: 'Booked', partySize: 4, userId: 3, restaurantId: 1, diningTableId: 2 })
-// const res2 = await Reservation.create({ status: 'WaitList', partySize: 4, userId: 4, restaurantId: 2, })
+// customer Cody successfully books a reservation at restuarant1 at a table of 4
+const cCodyRes = await customerCody.createReservation({
+  status: 'Booked',
+  partySize: 4
+})
+await cCodyRes.setRestaurant(restaurant1);
+await cCodyRes.addDiningTable(r1DT1);
 
-// Changing Occupied Dining Table status to Closed
-// await DiningTable.update(
-//   {isOccupied: true},
-// {where:
-// {
-//   id: res.diningTableId
-// }}
-// )
+console.log(Object.keys(Reservation.prototype))
+console.log(cCodyRes)
+
+// Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
+
+const cMurphyRes = await customerMurphy.createReservation({
+  status: 'WaitList',
+  partySize: 6
+})
+await cMurphyRes.setRestaurant(restaurant2);
+console.log(cMurphyRes)
+
+// Admin Cody will book a table for a party of 7 at restaurant2 successfuilly
+// (reserves dining table 2 at restaurant2), then leaves, freeing the table
+
+const aCodyRes = await adminCody.createReservation({
+  status: 'Booked',
+  partySize: 7
+})
+await aCodyRes.setRestaurant(restaurant2);
+await aCodyRes.addDiningTable(r2DT2);
+
+const bookedSeatings = await ReservedSeating.findAll()
+// should show 2 entries
+console.log(`Booked seats: `, bookedSeatings)
+console.log(Object.keys(ReservedSeating.prototype));
 
 
-// const booking = await Reservation.create({ status: 'WaitList', partySize: 4, })
-//  await booking.addRestaurant(restaurants[0]);
-// booking.addRestaurant(restaurants[0]);
 
-//  await booking.addUser(users[1])
-// await users[1].addReservation(booking);
+// console.log(Object.keys(Reservation.prototype));
 
-console.log(Object.keys(Reservation.prototype));
-
-
-  // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1]
-  //   }
-  // }
 }
 
 /*
