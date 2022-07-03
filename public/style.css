@@ -1,0 +1,29 @@
+body {
+  font-family: sans-serif;
+  background-color: wrgba(239, 249, 253, 0.867)
+}
+
+/* helps indicate that certain tag elements are clickable */
+.look-like-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
