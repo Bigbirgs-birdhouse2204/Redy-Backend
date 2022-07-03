@@ -8,6 +8,7 @@ const {
     Reservation,
     ReservedSeating,
     Restaurant,
+    RestaurantAvailability,
     RestaurantOwner,
     User,
   },
@@ -75,6 +76,82 @@ async function seed() {
   ]);
   const restaurant1 = restaurants[0];
   const restaurant2 = restaurants[1];
+
+  // Adding Restaurant Availibility
+  // console.log(Object.keys(Restaurant.prototype))
+  await restaurant1.createRestaurantAvailability({
+    day: "Sunday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Monday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Tuesday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Wednesday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Thursday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Friday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant1.createRestaurantAvailability({
+    day: "Saturday",
+    openingTime: "9:00:00",
+    closingTime: "17:00:00",
+  });
+
+  await restaurant2.createRestaurantAvailability({
+    day: "Sunday",
+    openingTime: "11:00:00",
+    closingTime: "23:00:00",
+  });
+
+
+  await restaurant2.createRestaurantAvailability({
+    day: "Tuesday",
+    openingTime: "11:00:00",
+    closingTime: "23:00:00",
+  });
+
+
+  await restaurant2.createRestaurantAvailability({
+    day: "Thursday",
+    openingTime: "11:00:00",
+    closingTime: "23:00:00",
+  });
+
+  await restaurant2.createRestaurantAvailability({
+    day: "Friday",
+    openingTime: "11:00:00",
+    closingTime: "23:00:00",
+  });
+
+  await restaurant2.createRestaurantAvailability({
+    day: "Saturday",
+    openingTime: "11:00:00",
+    closingTime: "23:00:00",
+  });
 
   // Creating Dining Tables
   const diningTables = await Promise.all([
@@ -157,8 +234,8 @@ async function seed() {
   let bookedSeatings = await ReservedSeating.findAll();
   // should show 2 entries
   console.log(`Booked seats Before Admin Cody leaves: `, bookedSeatings.length);
-// Admin Cody's Table is now freed up
-await aCodyRes.update({status: 'Completed'});
+  // Admin Cody's Table is now freed up
+  await aCodyRes.update({ status: "Completed" });
   await ReservedSeating.destroy({
     where: {
       reservationId: aCodyRes.id,

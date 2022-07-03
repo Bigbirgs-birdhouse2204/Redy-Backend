@@ -6,6 +6,7 @@ const DiningTable = require('./models/DiningTable')
 const Reservation = require('./models/Reservation')
 const ReservedSeating = require('./models/ReservedSeating')
 const Restaurant = require('./models/Restaurant')
+const RestaurantAvailability = require('./models/RestaurantAvailability')
 const RestaurantOwner = require('./models/RestaurantOwner')
 const User = require('./models/User')
 
@@ -15,6 +16,10 @@ const User = require('./models/User')
 // User & Restaurant Owner O-O
 User.hasOne(RestaurantOwner);
 RestaurantOwner.belongsTo(User);
+
+// Restaurant & Restaurant Availability O-M
+Restaurant.hasMany(RestaurantAvailability);
+RestaurantAvailability.belongsTo(Restaurant);
 
 // Restaurant & Dining Table  O-M
 Restaurant.hasMany(DiningTable);
@@ -76,6 +81,7 @@ module.exports = {
     Reservation,
     ReservedSeating,
     Restaurant,
+    RestaurantAvailability,
     RestaurantOwner,
     User,
   },
