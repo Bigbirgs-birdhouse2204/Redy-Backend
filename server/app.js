@@ -10,11 +10,19 @@ app.use(morgan('dev'))
 // body parsing middleware
 app.use(express.json())
 
+
 // auth and api routes
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
 
+if(process.env.NODE_ENV === 'production'){
+  //set static folder
+  app.use(express.static('public'));
+}
+
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '..', 'public/index.html')));
+
+
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
