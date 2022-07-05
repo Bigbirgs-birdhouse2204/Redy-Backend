@@ -64,7 +64,6 @@ async function seed() {
   const customerMurphy = users[3];
 
   // Adding Restaurant Owners
-
   await adminCody.createRestaurantOwner();
   await rOwnerMurphy.createRestaurantOwner();
 
@@ -79,7 +78,7 @@ async function seed() {
   const restaurant2 = restaurants[1];
 
   // Adding Restaurant Availibility
-  // console.log(Object.keys(Restaurant.prototype))
+
   await restaurant1.createRestaurantAvailability({
     day: "Sunday",
     openingTime: "9:00:00",
@@ -128,13 +127,11 @@ async function seed() {
     closingTime: "23:00:00",
   });
 
-
   await restaurant2.createRestaurantAvailability({
     day: "Tuesday",
     openingTime: "11:00:00",
     closingTime: "23:00:00",
   });
-
 
   await restaurant2.createRestaurantAvailability({
     day: "Thursday",
@@ -214,15 +211,12 @@ async function seed() {
   await cCodyRes.setRestaurant(restaurant1);
   await cCodyRes.addDiningTable(r1DT1);
 
-  // console.log(cCodyRes);
-
   // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
   const cMurphyRes = await customerMurphy.createReservation({
     status: "WaitList",
     partySize: 6,
   });
   await cMurphyRes.setRestaurant(restaurant2);
-  // console.log(cMurphyRes);
 
   // Admin Cody will book a table for a party of 7 at restaurant2 successfuilly
   // (reserves dining table 2 at restaurant2), then leaves, freeing the table
@@ -234,7 +228,8 @@ async function seed() {
   await aCodyRes.addDiningTable(r2DT2);
   let bookedSeatings = await ReservedSeating.findAll();
   // should show 2 entries
-  console.log(`Booked seats Before Admin Cody leaves: `, bookedSeatings.length);
+  // console.log(`Booked seats Before Admin Cody leaves: `, bookedSeatings.length);
+
   // Admin Cody's Table is now freed up
   await aCodyRes.update({ status: "Completed" });
   await ReservedSeating.destroy({
@@ -245,73 +240,23 @@ async function seed() {
   bookedSeatings = await ReservedSeating.findAll();
 
   // should show 1 entry
-  console.log(`Booked seats after Admin Cody Left: `, bookedSeatings.length);
-  // App will pull up available Dining Tables that Users can book
-  // console.log(await restaurant1.getDiningTables())
-  // const fetchedRS = await ReservedSeating.findAll({include: [DiningTable]})
+  // console.log(`Booked seats after Admin Cody Left: `, bookedSeatings.length);
+
+  // App will pull up available Dining Tables from restuarant1 that Users can book
   const openDiningTables = await DiningTable.findAll({
     where: {
       restaurantId: restaurant1.id,
-      // [Op.not]: {id: '$reservedSeating.diningTableId$'}
-      // [Op.ne]: {id: '$reservedSeating.diningTableId$'}
-
-    //  id : { [Op.ne]: '$reservedSeating.id$'}
-      // id : { [Op.not]: '$reservations.reservedSeating.diningTableId$'}
-      // id : { [Op.not]: '$reservations.reservedSeating.diningTableId$' :  }
-      // id : { '$reservations.reservedSeating.diningTableId$': { [Op.eq]: col('diningTable.id') }}
-      // id : { [Op.ne]: '$reservedSeating.diningTableId$'}
-
-      // '$reservations.reservedSeating.diningTableId$': { [Op.ne]: DiningTable.id }
-      // id: '$reservations.reservedSeating.diningTableId$',
-      // '$reservations.reservedSeating$': {diningTableId:  col('diningTable.id')}
-  //     '$reservedSeatings.diningTableId$': {[Op.or]: {
-  //   [Op.ne]: col('diningTable.id'),
-  //   [Op.eq]: null
-  // }}
-  '$reservations.reservedSeating.diningTableId$': { [Op.eq]: null}
-
-      // { [Op.ne]: col('diningTable.id') }
-      // '$reservations.reservedSeating.diningTableId$': { [Op.ne]: col('diningTable.id') }
-      // '$reservations.reservedSeating.diningTableId$': { [Op.eq]: col('diningTable.id') }
-      // where: sequelize.where(sequelize.fn('char_length', sequelize.col('content')), 7)
+      "$reservations.reservedSeating.diningTableId$": { [Op.eq]: null },
     },
-  //   include: [{
-  //     model: ReservedSeating,
-  //     as: 'reservedSeatings'
-  // }]
-  include: [{
-    model: Reservation,
-}]
-    // include: ReservedSeating,
-    // include: [{
-    //   // model: ReservedSeating,
-    //   model: Reservation,
-    //   // through: {
-    //     // where: {
-    //       // Here, `completed` is a column present at the junction table
-    //       // diningTableId: 1
-    //       // diningTableId: { [Op.ne]: 1 }
-    //       // diningTableId: { [Op.ne]: col('diningTable.id') }
-    //       // completed: true
-    //     // }
-    //   // }
-    //   include: [{
-    //   model: ReservedSeating,
-    //   where: {
-    //       // diningTableId: { [Op.ne]: DiningTable.id }
-    //   }
-    //   }]
-    // }]
-    // include: {
-    //   // model: 'reservedseating',
-    //   model: Reservation,
-    //   // as: 'reservedSeating'
-    // }
-  })
-  console.log(JSON.stringify(openDiningTables, null, 2));
+    include: [
+      {
+        model: Reservation,
+      },
+    ],
+  });
+  // console.log(JSON.stringify(openDiningTables, null, 2));
   // console.log(await ReservedSeating.findAll({include: [DiningTable]}))
-// console.log(Object.keys(Restaurant.prototype))
-
+  // console.log(Object.keys(Restaurant.prototype))
 
   console.log(`seeded successfully`);
 }

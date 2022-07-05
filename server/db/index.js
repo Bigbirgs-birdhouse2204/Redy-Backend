@@ -46,7 +46,7 @@ Restaurant.hasMany(Reservation);
 // Dining Table & Reservation Super M-M Table Through Reserved Seating
 DiningTable.belongsToMany(Reservation, { through: ReservedSeating });
 Reservation.belongsToMany(DiningTable, { through: ReservedSeating });
-ReservedSeating.belongsTo(DiningTable, {as: 'reservedSeatings' });
+ReservedSeating.belongsTo(DiningTable);
 ReservedSeating.belongsTo(Reservation);
 DiningTable.hasMany(ReservedSeating);
 Reservation.hasMany(ReservedSeating);
