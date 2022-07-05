@@ -43,34 +43,14 @@ Restaurant.hasMany(Reservation);
 
 
 
-// Super M-M Reserved Seating Table ft Reservation & Dining Table
-
+// Dining Table & Reservation Super M-M Table Through Reserved Seating
 DiningTable.belongsToMany(Reservation, { through: ReservedSeating });
 Reservation.belongsToMany(DiningTable, { through: ReservedSeating });
-ReservedSeating.belongsTo(DiningTable);
+ReservedSeating.belongsTo(DiningTable, {as: 'reservedSeatings' });
 ReservedSeating.belongsTo(Reservation);
 DiningTable.hasMany(ReservedSeating);
 Reservation.hasMany(ReservedSeating);
 
-// Restaurant.belongsToMany(Reservation, { through: Reservation });
-// Restaurant.hasMany(Reservation);
-// Reservation.belongsTo(Restaurant);
-// User.hasMany(Reservation);
-// Reservation.belongsTo(User);
-// DiningTable.hasMany(Reservation,
-// //   {
-// //   foreignKey: {
-// //     name: 'diningTableId'
-// //   }
-// // }
-// );
-// Reservation.belongsTo(DiningTable,
-//   {
-//     foreignKey: {
-//       name: 'diningTableId'
-//     }
-//   }
-//   );
 
 
 module.exports = {
