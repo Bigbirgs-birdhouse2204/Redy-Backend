@@ -218,6 +218,12 @@ async function seed() {
   });
   await cMurphyRes.setRestaurant(restaurant2);
 
+  // await cMurphyRes.update({ status: "Booked" });   
+
+  // await cMurphyRes.addDiningTable(r2DT2);
+
+
+
   // Admin Cody will book a table for a party of 7 at restaurant2 successfuilly
   // (reserves dining table 2 at restaurant2), then leaves, freeing the table
   const aCodyRes = await adminCody.createReservation({
@@ -245,7 +251,8 @@ async function seed() {
   // App will pull up available Dining Tables from restuarant1 that Users can book
   const openDiningTables = await DiningTable.findAll({
     where: {
-      restaurantId: restaurant1.id,
+      restaurantId: restaurant2.id,
+      isOccupied: false,
       "$reservations.reservedSeating.diningTableId$": { [Op.eq]: null },
     },
     include: [
