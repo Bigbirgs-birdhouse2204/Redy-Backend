@@ -26,35 +26,43 @@ async function seed() {
   // Creating Users
   const users = await Promise.all([
     User.create({
-      firstName: "cody",
-      lastName: "Smith",
-      email: "cody@gmail.com",
-      password: "123",
-      phone: "555-555-5555",
+      firstName: 'cody',
+      lastName: 'Smith',
+      email: 'cody@gmail.com',
+      password: '123',
+      phone: '555-555-5555',
       isAdmin: true,
     }),
     User.create({
-      firstName: "murphy",
-      lastName: "Smith",
-      email: "murphy@gmail.com",
-      password: "123",
-      phone: "555-555-5555",
+      firstName: 'murphy',
+      lastName: 'Smith',
+      email: 'murphy@gmail.com',
+      password: '123',
+      phone: '555-555-5555',
       isAdmin: false,
     }),
     User.create({
-      firstName: "cody2",
-      lastName: "Smith",
-      email: "cody2@gmail.com",
-      password: "123",
-      phone: "555-555-5555",
+      firstName: 'cody2',
+      lastName: 'Smith',
+      email: 'cody2@gmail.com',
+      password: '123',
+      phone: '555-555-5555',
       isAdmin: false,
     }),
     User.create({
-      firstName: "murphy2",
-      lastName: "Smith",
-      email: "murphy2@gmail.com",
-      password: "123",
-      phone: "555-555-5555",
+      firstName: 'murphy2',
+      lastName: 'Smith',
+      email: 'murphy2@gmail.com',
+      password: '123',
+      phone: '555-555-5555',
+      isAdmin: false,
+    }),
+    User.create({
+      firstName: 'testDummy',
+      lastName: 'test',
+      email: 'test@gmail.com',
+      password: '123',
+      phone: '555-555-5555',
       isAdmin: false,
     }),
   ]);
@@ -218,7 +226,7 @@ async function seed() {
   });
   await cMurphyRes.setRestaurant(restaurant2);
 
-  // await cMurphyRes.update({ status: "Booked" });   
+  // await cMurphyRes.update({ status: "Booked" });
 
   // await cMurphyRes.addDiningTable(r2DT2);
 
