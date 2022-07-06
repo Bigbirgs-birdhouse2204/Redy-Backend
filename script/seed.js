@@ -88,13 +88,13 @@ Restaurant.create({
 name: "La Esquina", address: "114 Kenmare Street, New York", ratings: 4.2,
 priceLevel: 2, placeId: "ChIJibtT3ohZwokR7tX0gp0nG8U", totalUserRatings: 2188,
 imgUrl: "Aap_uEDD7-cRm7aEYHHFFtyVBVUovdpmo6o5_X3bO5YNFKmmTk3JfCI-7O8-Q_btdo3GW059sX5Sy4v-Z-XD2Eplo_f6AIJi7qjU_-dj48y3BlAzlt2Hw1kcvnGkN5bTzEAzAF2IJ8lxt2Mc1BR5iv59xFXUB6PVtURXwDyvClyDw82vM4WH",
-longitude: -73.99756359999999,latitude: 40.7213879})
+longitude: -73.99756359999999,latitude: 40.7213879}),
 Restaurant.create({
 address: "377 Greenwich Street, New York", imgUrl: "Aap_uECX3WpuQl5rP99HCe3dAdtVHaPYCOfVbB_xMvBsVV-P5BnIX3WmQtu2QwasKhUe8iIpwHSfS6DsVSE2cwv_WQGrRatjvYarJuByv0ZCGNdPy1Q90uwRmjxNcnQHUOf1_r2EEQ2u6CisU9ltxdH6FT-NTYDTTEgtfPrU79lNKsrfRLXF",
 latitude: 40.71984009999999, longitude: -74.00993439999999, name: "Locanda Verde",
 placeId: "ChIJTWkuhfVZwokRS_go-fdp7Vs", priceLevel: 3, ratings: 4.5,
 totalUserRatings: 1511,
-})
+}),
 Restaurant.create({
   address: "375 Greenwich Street, New York",
   imgUrl: "Aap_uEAJp_qNjTuT3DrOAcYXk4zkPZ3OupjYbNZtFnrgzeqckCXT8Y1zUUA0BQjtrChBUsf5qZ-Qxmu1u52nN13LD3rcTkh9f5FI09fO_CgcBEnS064Lo9ZiNHSoWFg3e7vf9NUcfgxEXppHwO6BsvQDnLThCjlWJMzu9CI30BalTaA8pG3c",
@@ -105,7 +105,7 @@ Restaurant.create({
   priceLevel: 3,
   ratings: 4.1,
   totalUserRatings: 932,
-})
+}),
 Restaurant.create({
   address: "9 Crosby Street, New York",
   imgUrl: "Aap_uEBAxl7D2xFIzqwzsHV6HM30l8hFq3G3ZmV4O__lETAa6fXwPdwSdkAyo_kx5gV-5apS53i9SF4m1PIblZ8jl6LFbgxGLr-znxIJNfYoBhUjumtdBDz_zHZLmFJsSltpmDlqHxZChRLirCNzZRx6OmZMr9qmPdaU0A_J9u2xtyJNrw60",
