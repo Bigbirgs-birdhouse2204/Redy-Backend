@@ -34,13 +34,6 @@ const Restaurant = db.define('restaurant', {
       len: 1,
     },
   },
-  hoursOfOperation: {
-    type: Sequelize.STRING,
-    allowNull: true,
-    validate: {
-      len: 1,
-    },
-  },
   imgUrl: {
     type: Sequelize.STRING,
     allowNull: true,

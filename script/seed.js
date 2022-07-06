@@ -128,58 +128,20 @@ Restaurant.create({
   ratings: 4.3,
   totalUserRatings: 1703,
 }),
-Restaurant.create({
-  name: "La Esquina", address: "114 Kenmare Street, New York", ratings: 4.2,
-  priceLevel: 2, placeId: "ChIJibtT3ohZwokR7tX0gp0nG8U", totalUserRatings: 2188,
-  imgUrl: "Aap_uEDD7-cRm7aEYHHFFtyVBVUovdpmo6o5_X3bO5YNFKmmTk3JfCI-7O8-Q_btdo3GW059sX5Sy4v-Z-XD2Eplo_f6AIJi7qjU_-dj48y3BlAzlt2Hw1kcvnGkN5bTzEAzAF2IJ8lxt2Mc1BR5iv59xFXUB6PVtURXwDyvClyDw82vM4WH",
-  longitude: -73.99756359999999,latitude: 40.7213879}),
-  Restaurant.create({
-  address: "377 Greenwich Street, New York", imgUrl: "Aap_uECX3WpuQl5rP99HCe3dAdtVHaPYCOfVbB_xMvBsVV-P5BnIX3WmQtu2QwasKhUe8iIpwHSfS6DsVSE2cwv_WQGrRatjvYarJuByv0ZCGNdPy1Q90uwRmjxNcnQHUOf1_r2EEQ2u6CisU9ltxdH6FT-NTYDTTEgtfPrU79lNKsrfRLXF",
-  latitude: 40.71984009999999, longitude: -74.00993439999999, name: "Locanda Verde",
-  placeId: "ChIJTWkuhfVZwokRS_go-fdp7Vs", priceLevel: 3, ratings: 4.5,
-  totalUserRatings: 1511,
-  }),
-  Restaurant.create({
-    address: "375 Greenwich Street, New York",
-    imgUrl: "Aap_uEAJp_qNjTuT3DrOAcYXk4zkPZ3OupjYbNZtFnrgzeqckCXT8Y1zUUA0BQjtrChBUsf5qZ-Qxmu1u52nN13LD3rcTkh9f5FI09fO_CgcBEnS064Lo9ZiNHSoWFg3e7vf9NUcfgxEXppHwO6BsvQDnLThCjlWJMzu9CI30BalTaA8pG3c",
-    latitude: 40.7196368,
-    longitude: -74.009776,
-    name: "Tribeca Grill",
-    placeId: "ChIJRzzoh_VZwokRdXF0AL5vPvA",
-    priceLevel: 3,
-    ratings: 4.1,
-    totalUserRatings: 932,
-  }),
-  Restaurant.create({
-    address: "9 Crosby Street, New York",
-    imgUrl: "Aap_uEBAxl7D2xFIzqwzsHV6HM30l8hFq3G3ZmV4O__lETAa6fXwPdwSdkAyo_kx5gV-5apS53i9SF4m1PIblZ8jl6LFbgxGLr-znxIJNfYoBhUjumtdBDz_zHZLmFJsSltpmDlqHxZChRLirCNzZRx6OmZMr9qmPdaU0A_J9u2xtyJNrw60",
-    latitude: 40.71981419999999,
-    longitude: -74.00007339999999,
-    name: "NOMO SOHO",
-    placeId: "ChIJM8mGj4lZwokRSbZBvNOVNKM",
-    priceLevel: 3,
-    ratings: 4.1,
-    totalUserRatings: 1369,
-  }),
-  Restaurant.create({
-    address: "131 Sullivan Street, New York",
-    imgUrl: "Aap_uEBFmXkzT3esdOqUokUJN1bXtlzvtYrHb8K_LaUeh0-XNZmRsO5y5Z_XRC_FZsOUuDpenlV11qHE5GvI4Pe-tgBFPKBQ16Sl0Or6Bw_qVBLp7z6tsXWNB85_HKcL351lz8Fzo7kaJukP1Cx-9M_2HIIN737EZfk8iSFNVcVFFPx2gue0",
-    latitude: 40.72653280000001,
-    longitude: -74.0021536,
-    name: "The Dutch",
-    placeId: "ChIJ3RB9uI1ZwokRxCJXW-HpYZI",
-    priceLevel: 3,
-    ratings: 4.3,
-    totalUserRatings: 1703,
-  }),
 
 
 
-    Restaurant.create({ name: "test1", address: "123 FakeStreet" }),
-    Restaurant.create({ name: "test2", address: "123 FakeStreet" }),
   ]);
   const restaurant1 = restaurants[0];
   const restaurant2 = restaurants[1];
+  const restaurant3 = restaurants[2];
+  const restaurant4 = restaurants[3];
+  const restaurant5 = restaurants[4];
+  const restaurant6 = restaurants[5];
+  const restaurant7 = restaurants[6];
+  const restaurant8 = restaurants[7];
+  const restaurant9 = restaurants[8];
+  const restaurant10 = restaurants[9];
 
   // Adding Restaurant Availibility
 
@@ -301,9 +263,16 @@ Restaurant.create({
   await restaurant2.addCuisine(indian);
 
   // Adding Restuarants to Restaurant Owners
-  rOwners.map(
-    async (owner, index) => await owner.addRestaurant(restaurants[index])
-  );
+  restaurants.map( async (r, index) =>{
+    if(index %2 === 0){
+ await rOwners[1].addRestaurant(restaurants[index])
+    } else{
+ await rOwners[0].addRestaurant(restaurants[index])
+    }
+  })
+  // rOwners.map(
+  //   async (owner, index) => await owner.addRestaurant(restaurants[index])
+  // );
 
   // Creating Reservations
 
