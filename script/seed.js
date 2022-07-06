@@ -79,6 +79,102 @@ async function seed() {
 
   // Creating Restaurants
   const restaurants = await Promise.all([
+    Restaurant.create({ name: "Cipriani Downtown NYC", address: "376 West Broadway, New York", ratings: 4.2, priceLevel: 4, placeId: 'ChIJ71HLcIxZwokRXymDgawloWI', totalUserRatings: 848, imgUrl: `Aap_uECXQvo6mJkt2Sg5jssUMLwbv6I4o7pGbgpgH1Z9_KwJ1iaXGm1NkDx7hibj8i5KW7sm2td5MXmZ74jE2g8_nRsgwT0QypbkFP22OJz9DHkg7WXWLeO1LZlGSELqXFotTu9O81BcVeVOpC2wjoQE0_5hnrskU4pB-LqmWsfF3ajjY1Bu`, longitude: '-74.00295559999999', latitude: '40.7235595' }),
+    Restaurant.create({ name: "Balthazar", address: "80 Spring Street, New York", ratings: 4.4, priceLevel: 3, placeId: 'ChIJt7fMLIlZwokRCRtM9bNDg78', totalUserRatings: 5425, imgUrl: `Aap_uEDo10UCVpVwHwT0wg6BjfzWU5R4ucS1K7CgTIQ8kuHWnGYo-XgJxZ4ZfvS-1XTWEuCGVbbmuNT644fJ_ZX6HP-VDHs5aMT_5jVgch_kjg2y9IRmrwXA-jSkcgue0FqwUFGKmaTtv_sS6_SPxrMOVL2pRRJmWmVCeIsNh3OdfdtMT6Iv`, longitude: '-73.99822979999999', latitude: '40.72266799999999' }),
+    Restaurant.create({ name: "Macao Trading Company", address: "311 Church Street, New York", ratings: 4.5, priceLevel: 3, placeId: 'ChIJA9S9jIpZwokRZTF0bHWwXYU', totalUserRatings: 883, imgUrl: `Aap_uEBg-7TM4xB0-YbdPpGicoRmxWI1hDm6K6O01YCf-2B792T4PgK4tirpuWDCqQfzPJhWS410SGfr9-WhkBoz-wKxqV2F9L-Hoy6SNzhBOsTECvpiYRPeBIstkjP106iMWApaonF92NnUszhZL_Kq5h06qCe_pCZMS8mvzZ0x6i9-Ud1R`, longitude: '-73.99822979999999', latitude: '40.72266799999999' }),
+    Restaurant.create({ name: "Bubby's", address: "120 Hudson Street, New York", ratings: 4.4, priceLevel: 2, placeId: 'ChIJETquaPVZwokRVYYGSKrg4E0', totalUserRatings: 4721, imgUrl: `Aap_uED19lLOpd0kx0-5m3nw6ytKKzuczzdm7FY0UZzD_JRTtnHTLF7x_-COWiVfe2tTKQczt15HkkxutVgtGJ_avBq177biecg77XGgJPrJJQYXI74_zKO9MXMvePJlt6AHJVbGGSXLAAcgefyfOymk8g0XItbygRb5_6GgsyFP5kD5uEZ2`, longitude: '-74.0083829', latitude: '40.719819' }),
+    Restaurant.create({ name: "Boqueria Soho", address: "171 Spring Street, New York", ratings: 4.4, priceLevel: 2, placeId: 'ChIJA914R4xZwokRzfeGqRbXLd4', totalUserRatings: 1642, imgUrl: `Aap_uEAEfCrOv_lmiLGjKKx21W890lTPURrOzk4S-k39zf22ivJRoua0Y4I0aK0Udp3ya6_xsQOYZRCa12lJZdFqudlb_8zijjg1VucU-R4TIKz7jk9253Sg6ncmOKL-v9JpfZ7npXEt80lhzSR7ULKaY99_Xy8D4DHSpugw24qXgMv21gsl`, longitude: '-74.00215539999999', latitude: '40.7249228' }),
+Restaurant.create({
+name: "La Esquina", address: "114 Kenmare Street, New York", ratings: 4.2,
+priceLevel: 2, placeId: "ChIJibtT3ohZwokR7tX0gp0nG8U", totalUserRatings: 2188,
+imgUrl: "Aap_uEDD7-cRm7aEYHHFFtyVBVUovdpmo6o5_X3bO5YNFKmmTk3JfCI-7O8-Q_btdo3GW059sX5Sy4v-Z-XD2Eplo_f6AIJi7qjU_-dj48y3BlAzlt2Hw1kcvnGkN5bTzEAzAF2IJ8lxt2Mc1BR5iv59xFXUB6PVtURXwDyvClyDw82vM4WH",
+longitude: -73.99756359999999,latitude: 40.7213879})
+Restaurant.create({
+address: "377 Greenwich Street, New York", imgUrl: "Aap_uECX3WpuQl5rP99HCe3dAdtVHaPYCOfVbB_xMvBsVV-P5BnIX3WmQtu2QwasKhUe8iIpwHSfS6DsVSE2cwv_WQGrRatjvYarJuByv0ZCGNdPy1Q90uwRmjxNcnQHUOf1_r2EEQ2u6CisU9ltxdH6FT-NTYDTTEgtfPrU79lNKsrfRLXF",
+latitude: 40.71984009999999, longitude: -74.00993439999999, name: "Locanda Verde",
+placeId: "ChIJTWkuhfVZwokRS_go-fdp7Vs", priceLevel: 3, ratings: 4.5,
+totalUserRatings: 1511,
+})
+Restaurant.create({
+  address: "375 Greenwich Street, New York",
+  imgUrl: "Aap_uEAJp_qNjTuT3DrOAcYXk4zkPZ3OupjYbNZtFnrgzeqckCXT8Y1zUUA0BQjtrChBUsf5qZ-Qxmu1u52nN13LD3rcTkh9f5FI09fO_CgcBEnS064Lo9ZiNHSoWFg3e7vf9NUcfgxEXppHwO6BsvQDnLThCjlWJMzu9CI30BalTaA8pG3c",
+  latitude: 40.7196368,
+  longitude: -74.009776,
+  name: "Tribeca Grill",
+  placeId: "ChIJRzzoh_VZwokRdXF0AL5vPvA",
+  priceLevel: 3,
+  ratings: 4.1,
+  totalUserRatings: 932,
+})
+Restaurant.create({
+  address: "9 Crosby Street, New York",
+  imgUrl: "Aap_uEBAxl7D2xFIzqwzsHV6HM30l8hFq3G3ZmV4O__lETAa6fXwPdwSdkAyo_kx5gV-5apS53i9SF4m1PIblZ8jl6LFbgxGLr-znxIJNfYoBhUjumtdBDz_zHZLmFJsSltpmDlqHxZChRLirCNzZRx6OmZMr9qmPdaU0A_J9u2xtyJNrw60",
+  latitude: 40.71981419999999,
+  longitude: -74.00007339999999,
+  name: "NOMO SOHO",
+  placeId: "ChIJM8mGj4lZwokRSbZBvNOVNKM",
+  priceLevel: 3,
+  ratings: 4.1,
+  totalUserRatings: 1369,
+}),
+Restaurant.create({
+  address: "131 Sullivan Street, New York",
+  imgUrl: "Aap_uEBFmXkzT3esdOqUokUJN1bXtlzvtYrHb8K_LaUeh0-XNZmRsO5y5Z_XRC_FZsOUuDpenlV11qHE5GvI4Pe-tgBFPKBQ16Sl0Or6Bw_qVBLp7z6tsXWNB85_HKcL351lz8Fzo7kaJukP1Cx-9M_2HIIN737EZfk8iSFNVcVFFPx2gue0",
+  latitude: 40.72653280000001,
+  longitude: -74.0021536,
+  name: "The Dutch",
+  placeId: "ChIJ3RB9uI1ZwokRxCJXW-HpYZI",
+  priceLevel: 3,
+  ratings: 4.3,
+  totalUserRatings: 1703,
+}),
+Restaurant.create({
+  name: "La Esquina", address: "114 Kenmare Street, New York", ratings: 4.2,
+  priceLevel: 2, placeId: "ChIJibtT3ohZwokR7tX0gp0nG8U", totalUserRatings: 2188,
+  imgUrl: "Aap_uEDD7-cRm7aEYHHFFtyVBVUovdpmo6o5_X3bO5YNFKmmTk3JfCI-7O8-Q_btdo3GW059sX5Sy4v-Z-XD2Eplo_f6AIJi7qjU_-dj48y3BlAzlt2Hw1kcvnGkN5bTzEAzAF2IJ8lxt2Mc1BR5iv59xFXUB6PVtURXwDyvClyDw82vM4WH",
+  longitude: -73.99756359999999,latitude: 40.7213879}),
+  Restaurant.create({
+  address: "377 Greenwich Street, New York", imgUrl: "Aap_uECX3WpuQl5rP99HCe3dAdtVHaPYCOfVbB_xMvBsVV-P5BnIX3WmQtu2QwasKhUe8iIpwHSfS6DsVSE2cwv_WQGrRatjvYarJuByv0ZCGNdPy1Q90uwRmjxNcnQHUOf1_r2EEQ2u6CisU9ltxdH6FT-NTYDTTEgtfPrU79lNKsrfRLXF",
+  latitude: 40.71984009999999, longitude: -74.00993439999999, name: "Locanda Verde",
+  placeId: "ChIJTWkuhfVZwokRS_go-fdp7Vs", priceLevel: 3, ratings: 4.5,
+  totalUserRatings: 1511,
+  }),
+  Restaurant.create({
+    address: "375 Greenwich Street, New York",
+    imgUrl: "Aap_uEAJp_qNjTuT3DrOAcYXk4zkPZ3OupjYbNZtFnrgzeqckCXT8Y1zUUA0BQjtrChBUsf5qZ-Qxmu1u52nN13LD3rcTkh9f5FI09fO_CgcBEnS064Lo9ZiNHSoWFg3e7vf9NUcfgxEXppHwO6BsvQDnLThCjlWJMzu9CI30BalTaA8pG3c",
+    latitude: 40.7196368,
+    longitude: -74.009776,
+    name: "Tribeca Grill",
+    placeId: "ChIJRzzoh_VZwokRdXF0AL5vPvA",
+    priceLevel: 3,
+    ratings: 4.1,
+    totalUserRatings: 932,
+  }),
+  Restaurant.create({
+    address: "9 Crosby Street, New York",
+    imgUrl: "Aap_uEBAxl7D2xFIzqwzsHV6HM30l8hFq3G3ZmV4O__lETAa6fXwPdwSdkAyo_kx5gV-5apS53i9SF4m1PIblZ8jl6LFbgxGLr-znxIJNfYoBhUjumtdBDz_zHZLmFJsSltpmDlqHxZChRLirCNzZRx6OmZMr9qmPdaU0A_J9u2xtyJNrw60",
+    latitude: 40.71981419999999,
+    longitude: -74.00007339999999,
+    name: "NOMO SOHO",
+    placeId: "ChIJM8mGj4lZwokRSbZBvNOVNKM",
+    priceLevel: 3,
+    ratings: 4.1,
+    totalUserRatings: 1369,
+  }),
+  Restaurant.create({
+    address: "131 Sullivan Street, New York",
+    imgUrl: "Aap_uEBFmXkzT3esdOqUokUJN1bXtlzvtYrHb8K_LaUeh0-XNZmRsO5y5Z_XRC_FZsOUuDpenlV11qHE5GvI4Pe-tgBFPKBQ16Sl0Or6Bw_qVBLp7z6tsXWNB85_HKcL351lz8Fzo7kaJukP1Cx-9M_2HIIN737EZfk8iSFNVcVFFPx2gue0",
+    latitude: 40.72653280000001,
+    longitude: -74.0021536,
+    name: "The Dutch",
+    placeId: "ChIJ3RB9uI1ZwokRxCJXW-HpYZI",
+    priceLevel: 3,
+    ratings: 4.3,
+    totalUserRatings: 1703,
+  }),
+
+
+
     Restaurant.create({ name: "test1", address: "123 FakeStreet" }),
     Restaurant.create({ name: "test2", address: "123 FakeStreet" }),
   ]);
