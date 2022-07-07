@@ -33,7 +33,6 @@
     "node": "16.14.2"
   },
   "devDependencies": {
-    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.16.0",
     "chai": "^4.2.0",
     "enzyme": "^3.9.0",
