@@ -3,7 +3,6 @@ const PORT = process.env.PORT || 8080
 const app = require('./app')
 const seed = require('../script/seed');
 require('dotenv').config()
-console.log(process.env) // remove this after you've confirmed it work
 const init = async () => {
   try {
     if(process.env.SEED === 'true'){

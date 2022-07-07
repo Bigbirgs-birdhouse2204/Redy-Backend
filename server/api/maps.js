@@ -1,16 +1,11 @@
 const router = require('express').Router();
-// const {
-//   models: { Restaurant },
-// } = require('../db');
 const axios = require('axios');
-const Restaurant = require('../db/models/Restaurant');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
 
-    // const lat = req.body.lat
-    // const long = req.body.long
+
     const lat = 40.714184;
     const long = -74.006238;
     let config = {
@@ -40,8 +35,7 @@ router.get('/', async (req, res, next) => {
   //  res.json(data)
     res.json(maps)
 
-    // const restaurants = await Restaurant.findAll();
-    // res.json(restaurants);
+
   } catch (err) {
     next(err);
   }
