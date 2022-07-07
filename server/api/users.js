@@ -13,8 +13,11 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'email', 'password'],
     });
     // res.send("Hello")
+    // console.log(process.env.API_KEY)
     res.json(users);
   } catch (err) {
     next(err);
   }
 });
+
+
