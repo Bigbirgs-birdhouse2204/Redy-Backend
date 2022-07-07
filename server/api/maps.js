@@ -8,7 +8,6 @@ router.get('/', async (req, res, next) => {
     // const lat = req.body.lat
     // const long = req.body.long
 
-
     const lat = 40.714184;
     const long = -74.006238;
     let config = {
@@ -33,8 +32,6 @@ router.get('/', async (req, res, next) => {
     });
     //  res.json(data)
     res.json(maps);
-
-
   } catch (err) {
     next(err);
   }
