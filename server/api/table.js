@@ -26,7 +26,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/restaurant/:id', async (req, res, next) => {
   try {
     const singleTable = await DiningTable.findAll({
-      where: { restaurantId: req.params.id },
+      where: { restaurantId: req.params.id, isOccupied: false },
     });
 
     res.json(singleTable);
