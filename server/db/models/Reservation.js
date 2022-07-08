@@ -1,16 +1,22 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-
 const Reservation = db.define('reservation', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
-    allowNull: false
+    allowNull: false,
   },
   status: {
-    type: Sequelize.DataTypes.ENUM('Booked', 'Completed', 'NoShow', 'WaitList', 'Cancelled', 'Pending'),
+    type: Sequelize.DataTypes.ENUM(
+      'Booked',
+      'Completed',
+      'NoShow',
+      'WaitList',
+      'Cancelled',
+      'Pending'
+    ),
     defaultValue: 'Pending',
   },
   partySize: {
