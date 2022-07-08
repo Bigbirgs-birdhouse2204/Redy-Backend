@@ -23,13 +23,43 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.get('/restaurant/:id', async (req, res, next) => {
+router.get('/restaurant/:restaurantId', async (req, res, next) => {
   try {
     const singleTable = await DiningTable.findAll({
-      where: { restaurantId: req.params.id, isOccupied: false },
+      where: { restaurantId: req.params.restaurantId, isOccupied: false },
     });
 
     res.json(singleTable);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/restaurant/:restaurantId/:tableId', async (req, res, next) => {
+  try {
+    const singleTable = await DiningTable.findOne({
+      where: {
+        restaurantId: req.params.restaurantId,
+        isOccupied: false,
+        id: req.params.tableId,
+      },
+    });
+    res.send(singleTable);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/restaurant/:restaurantId/:tableId', async (req, res, next) => {
+  try {
+    const singleTable = await DiningTable.findOne({
+      where: {
+        restaurantId: req.params.restaurantId,
+        isOccupied: false,
+        id: req.params.tableId,
+      },
+    });
+    res.send(await singleTable.update(req.body));
   } catch (err) {
     next(err);
   }
