@@ -84,6 +84,18 @@ User.authenticate = async function({ email, password }){
     return user.generateToken();
 };
 
+User.authenticateBusiness = async function({ email, password }){
+  const user = await this.findOne({where: { email: email.toLowerCase() }});
+
+  if (!user || !(await user.correctPassword(password))) {
+    const error = Error('Incorrect username/password');
+    error.status = 401;
+    throw error;
+  }
+
+  return {token: user.generateToken(), userId: user.id  };
+};
+
 User.findByToken = async function(token) {
   try {
 
