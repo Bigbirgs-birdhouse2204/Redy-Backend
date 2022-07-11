@@ -17,21 +17,21 @@ router.get('/', async (req, res, next) => {
     };
     const { data } = await axios(config);
 
-    const maps = data.results.map((restaurant) => {
-      return {
-        name: restaurant.name,
-        address: restaurant.vicinity,
-        ratings: restaurant.rating,
-        priceLevel: restaurant.price_level,
-        placeId: restaurant.place_id,
-        totalUserRatings: restaurant.user_ratings_total,
-        imgUrl: restaurant.photos[0].photo_reference,
-        longitude: restaurant.geometry.location.lng,
-        latitude: restaurant.geometry.location.lat,
-      };
-    });
+    // const maps = data.results.map((restaurant) => {
+    //   return {
+    //     name: restaurant.name,
+    //     address: restaurant.vicinity,
+    //     ratings: restaurant.rating,
+    //     priceLevel: restaurant.price_level,
+    //     placeId: restaurant.place_id,
+    //     totalUserRatings: restaurant.user_ratings_total,
+    //     imgUrl: restaurant.photos[0].photo_reference,
+    //     longitude: restaurant.geometry.location.lng,
+    //     latitude: restaurant.geometry.location.lat,
+    //   };
+    // });
     //  res.json(data)
-    res.json(maps);
+    res.json(data.results);
   } catch (err) {
     next(err);
   }
