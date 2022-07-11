@@ -10,9 +10,10 @@ router.get('/', async (req, res, next) => {
 
     const lat = 40.714184;
     const long = -74.006238;
+    const radius = 1609;
     let config = {
       method: 'get',
-      url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${long}&radius=1609&type=restaurant&key=${process.env.API_KEY}`,
+      url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${long}&radius=${radius}&type=restaurant&key=${process.env.API_KEY}`,
       headers: {},
     };
     const { data } = await axios(config);
