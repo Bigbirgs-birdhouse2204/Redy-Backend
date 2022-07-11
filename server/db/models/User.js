@@ -100,7 +100,10 @@ User.findByToken = async function(token) {
   try {
 
     const {id} = await jwt.verify(token, process.env.JWT)
-    const user = User.findByPk(id)
+    const user = User.findByPk(id,
+      {attributes: ['id', 'email', 'firstName', 'lastName', 'phone']}
+
+      )
     if (!user) {
       throw 'nooo'
     }
