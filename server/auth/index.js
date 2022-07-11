@@ -59,7 +59,27 @@ router.post('/business/signup', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   try {
-    res.send(await User.findByToken(req.headers.authorization))
+   const user = await User.findByToken(req.headers.authorization)
+  //  "auth": Object {
+  //   "createdAt": "2022-07-11T04:58:51.905Z",
+  //   "email": "customer1@gmail.com",
+  //   "firstName": "Customer",
+  //   "id": 5,
+  //   "isAdmin": false,
+  //   "lastName": "1",
+  //   "password": "$2b$05$3zm3KMyngavSMyC1HCEUyu5L4gPpB3jtPaF7K/40Us7awKCeU8TeG",
+  //   "phone": "555-555-5555",
+  //   "updatedAt": "2022-07-11T04:58:51.905Z",
+  // },
+
+    res.send(
+      {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        phone: user.phone,
+      }
+    )
   } catch (ex) {
     next(ex)
   }
