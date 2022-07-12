@@ -8,7 +8,7 @@ router.get('/restaurants', async (req, res, next) => {
   try {
 
     const user = await User.findByToken(req.headers.authorization)
-    let owner = RestaurantOwner.findOne({where: {userId: user.id}});
+    let owner = await RestaurantOwner.findOne({where: {userId: user.id}});
 
     const restaurants = await Restaurant.findAll({where: {
       ownerId: owner.id
