@@ -20,12 +20,12 @@ router.get('/restaurants', async (req, res, next) => {
   }
 });
 
-// router.get('/:id', async (req, res, next) => {
-//   try {
-//     const singleRestaurant = await Restaurant.findByPk(req.params.id);
+router.get('/restaurants/:id', async (req, res, next) => {
+  try {
+    const singleRestaurant = await Restaurant.findByPk(req.params.id);
 
-//     res.json(singleRestaurant);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    res.json(singleRestaurant);
+  } catch (err) {
+    next(err);
+  }
+})
