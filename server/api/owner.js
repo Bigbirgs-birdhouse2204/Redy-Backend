@@ -4,7 +4,7 @@ const {
 } = require('../db');
 module.exports = router;
 
-router.get('/restaurants', async (req, res, next) => {
+router.post('/restaurants', async (req, res, next) => {
   try {
 
     const user = await User.findByToken(req.headers.authorization)
