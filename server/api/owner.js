@@ -4,7 +4,7 @@ const {
 } = require('../db');
 module.exports = router;
 
-router.post('/restaurants', async (req, res, next) => {
+router.get('/restaurants', async (req, res, next) => {
   try {
 
     const user = await User.findByToken(req.headers.authorization)
@@ -20,12 +20,12 @@ router.post('/restaurants', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
-  try {
-    const singleRestaurant = await Restaurant.findByPk(req.params.id);
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const singleRestaurant = await Restaurant.findByPk(req.params.id);
 
-    res.json(singleRestaurant);
-  } catch (err) {
-    next(err);
-  }
-});
+//     res.json(singleRestaurant);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
