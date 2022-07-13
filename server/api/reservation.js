@@ -13,15 +13,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.get('/business/:restaurantId', async (req, res, next) => {
   try {
-    const { data } = await Reservation.create(req.body);
-    res.status(201).send(data);
-  } catch (error) {
-    next(error);
+    const reservation = await Reservation.findAll({
+      where: {
+        restaurantId: req.params.restaurantId
+      }
+    });
+    res.json(reservation);
+  } catch (err) {
+    next(err);
   }
 });
-
 router.get('/:id', async (req, res, next) => {
   try {
     const singleRestaurant = await Reservation.findByPk(req.params.id);
@@ -31,3 +34,13 @@ router.get('/:id', async (req, res, next) => {
     next(err);
   }
 });
+router.post('/', async (req, res, next) => {
+  try {
+    const { data } = await Reservation.create(req.body);
+    res.status(201).send(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
