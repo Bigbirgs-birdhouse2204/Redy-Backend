@@ -6,7 +6,7 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const reservation = await Reservation.findAll();
+    const reservation = await Reservation.findAll({include: ReservedSeating});
     res.json(reservation);
   } catch (err) {
     next(err);
