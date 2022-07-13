@@ -19,7 +19,7 @@ router.get('/business/:restaurantId', async (req, res, next) => {
       where: {
         restaurantId: req.params.restaurantId
       },
-      include: DiningTable
+      include: [DiningTable, User]
     });
     res.json(reservation);
   } catch (err) {
