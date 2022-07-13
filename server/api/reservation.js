@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { Reservation },
+  models: { Reservation, DiningTable, ReservedSeating  },
 } = require('../db');
 module.exports = router;
 
@@ -36,7 +36,14 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    const { data } = await Reservation.create(req.body);
+    const resData ={
+      status: req.body.status,
+      partySize: req.body.partySize,
+      restaurantId: req.body.restaurantId,
+      userId: req.body.userId,
+    }
+    const { data } = await Reservation.create(resData);
+    await data.addDiningTable(req.body.diningTableId);
     res.status(201).send(data);
   } catch (error) {
     next(error);
