@@ -358,7 +358,7 @@ for(let i =0; i< restaurants.length; i++){
   });
   await cCodyRes.setRestaurant(restaurant1);
   await cCodyRes.addDiningTable(r1DT1);
-
+ await r1DT1.update({isOccupied: true});
   // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
   const cMurphyRes = await customerMurphy.createReservation({
     status: 'WaitList',
