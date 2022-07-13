@@ -6,7 +6,7 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const reservation = await Reservation.findAll();
+    const reservation = await Reservation.findAll({include: DiningTable});
     res.json(reservation);
   } catch (err) {
     next(err);
@@ -19,7 +19,11 @@ router.get('/business/:restaurantId', async (req, res, next) => {
       where: {
         restaurantId: req.params.restaurantId
       },
-      include: ReservedSeating
+      include: [DiningTable, {
+        model: User,
+        attributes:['firstName', 'lastName', 'phone']
+
+      }]
     });
     res.json(reservation);
   } catch (err) {
