@@ -18,7 +18,8 @@ router.get('/business/:restaurantId', async (req, res, next) => {
     const reservation = await Reservation.findAll({
       where: {
         restaurantId: req.params.restaurantId
-      }
+      },
+      include: ReservedSeating
     });
     res.json(reservation);
   } catch (err) {
