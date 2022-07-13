@@ -290,6 +290,21 @@ async function seed() {
   const r2DT2 = diningTables[3];
 
   // Adding Dining Tables to Restaurants
+
+for(let i =0; i< restaurants.length; i++){
+ let DT1 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+ let DT2 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+ let DT3 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+ let DT4 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+ let DT5 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+
+  await restaurants[i].addDiningTable(DT1);
+  await restaurants[i].addDiningTable(DT2);
+  await restaurants[i].addDiningTable(DT3);
+  await restaurants[i].addDiningTable(DT4);
+  await restaurants[i].addDiningTable(DT5);
+}
+
   await restaurant1.addDiningTable(r1DT1);
   await restaurant1.addDiningTable(r1DT2);
   await restaurant2.addDiningTable(r2DT1);
