@@ -35,10 +35,10 @@ Restaurant.belongsToMany(Cuisine, { through: "CuisineTags" });
 // User & Restaurant M-M Table Through Reservation
 User.belongsToMany(Restaurant, { through: Reservation });
 Restaurant.belongsToMany(User, { through: Reservation });
-// Reservation.belongsTo(User);
-// Reservation.belongsTo(Restaurant);
-// User.hasMany(Reservation);
-// Restaurant.hasMany(Reservation);
+Reservation.belongsTo(User);
+Reservation.belongsTo(Restaurant);
+User.hasMany(Reservation);
+Restaurant.hasMany(Reservation);
 
 // Dining Table & Reservation M-M Table Through Reserved Seating
 DiningTable.belongsToMany(Reservation, { through: ReservedSeating });
