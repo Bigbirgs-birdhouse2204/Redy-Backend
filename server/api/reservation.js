@@ -41,25 +41,30 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-
     const user = await User.findByPk(req.body.userId)
     const restaurant = await Restaurant.findByPk(req.body.restaurantId)
     const diningTable = await DiningTable.findByPk(req.body.diningTableId)
-    // const resData ={
-    //   status: req.body.status,
-    //   partySize: req.body.partySize,
-    //   restaurantId: req.body.restaurantId,
-    //   userId: req.body.userId,
-    // }
-
-  const reservation =  await user.createReservation({
-      status: req.body.status,
-      partySize: req.body.partySize,
-    });
-
+    const reservation =  await user.createReservation({
+        status: req.body.status,
+        partySize: req.body.partySize,
+      });
     await reservation.setRestaurant(restaurant)
-    // const { data } = await Reservation.create(resData);
     await reservation.addDiningTable(diningTable);
+    res.status(201).send(reservation);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/waitlist', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.body.userId)
+    const restaurant = await Restaurant.findByPk(req.body.restaurantId)
+    const reservation =  await user.createReservation({
+        status: req.body.status,
+        partySize: req.body.partySize,
+      });
+    await reservation.setRestaurant(restaurant)
     res.status(201).send(reservation);
   } catch (error) {
     next(error);
