@@ -424,7 +424,7 @@ for(let i =0; i< restaurants.length; i++){
   });
   // console.log(JSON.stringify(openDiningTables, null, 2));
   // console.log(await ReservedSeating.findAll({include: [DiningTable]}))
-  // console.log(Object.keys(Restaurant.prototype))
+  // console.log(Object.keys(Reservation.prototype))
 
   console.log(`seeded successfully`);
 }

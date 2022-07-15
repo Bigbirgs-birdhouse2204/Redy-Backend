@@ -41,16 +41,40 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.body.userId)
-    const restaurant = await Restaurant.findByPk(req.body.restaurantId)
+
+     const user = await User.findByPk(req.body.userId)
+     const restaurant = await Restaurant.findByPk(req.body.restaurantId)
+
+const reservation = await Reservation.findOne({where:{
+  userId: req.body.userId
+},
+include: DiningTable
+});
+ if(reservation){
+
+  const oldDiningTable = await DiningTable.findOne({where:{
+    restaurantId: reservation.restaurantId
+  }})
+await oldDiningTable.update({isOccupied: false});
+await ReservedSeating.destroy({
+  where: {
+    reservationId: reservation.id,
+    diningTableId: oldDiningTable.id,
+  },
+});
+await reservation.destroy();
+
+ }
+
+
     const diningTable = await DiningTable.findByPk(req.body.diningTableId)
-    const reservation =  await user.createReservation({
+    const newReservation =  await user.createReservation({
         status: req.body.status,
         partySize: req.body.partySize,
       });
-    await reservation.setRestaurant(restaurant)
-    await reservation.addDiningTable(diningTable);
-    res.status(201).send(reservation);
+    await newReservation.setRestaurant(restaurant)
+    await newReservation.addDiningTable(diningTable);
+    res.status(201).send(newReservation);
   } catch (error) {
     next(error);
   }
