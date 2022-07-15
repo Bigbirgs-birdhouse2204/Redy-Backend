@@ -379,7 +379,7 @@ for(let i =0; i< restaurants.length; i++){
     status: 'WaitList',
     partySize: 6,
   });
-  await cMurphyRes.setRestaurant(restaurant2);
+  await cMurphyRes.setRestaurant(restaurant3);
 
   // await cMurphyRes.update({ status: "Booked" });
 
@@ -387,41 +387,41 @@ for(let i =0; i< restaurants.length; i++){
 
   // Admin Cody will book a table for a party of 7 at restaurant2 successfuilly
   // (reserves dining table 2 at restaurant2), then leaves, freeing the table
-  const aCodyRes = await adminCody.createReservation({
-    status: 'Booked',
-    partySize: 7,
-  });
-  await aCodyRes.setRestaurant(restaurant2);
-  await aCodyRes.addDiningTable(r2DT2);
-  let bookedSeatings = await ReservedSeating.findAll();
+  // const aCodyRes = await adminCody.createReservation({
+  //   status: 'Booked',
+  //   partySize: 7,
+  // });
+  // await aCodyRes.setRestaurant(restaurant2);
+  // await aCodyRes.addDiningTable(r2DT2);
+  // let bookedSeatings = await ReservedSeating.findAll();
   // should show 2 entries
   // console.log(`Booked seats Before Admin Cody leaves: `, bookedSeatings.length);
 
   // Admin Cody's Table is now freed up
-  await aCodyRes.update({ status: 'Completed' });
-  await ReservedSeating.destroy({
-    where: {
-      reservationId: aCodyRes.id,
-    },
-  });
-  bookedSeatings = await ReservedSeating.findAll();
+  // await aCodyRes.update({ status: 'Completed' });
+  // await ReservedSeating.destroy({
+  //   where: {
+  //     reservationId: aCodyRes.id,
+  //   },
+  // });
+  // bookedSeatings = await ReservedSeating.findAll();
 
   // should show 1 entry
   // console.log(`Booked seats after Admin Cody Left: `, bookedSeatings.length);
 
   // App will pull up available Dining Tables from restuarant1 that Users can book
-  const openDiningTables = await DiningTable.findAll({
-    where: {
-      restaurantId: restaurant2.id,
-      isOccupied: false,
-      '$reservations.reservedSeating.diningTableId$': { [Op.eq]: null },
-    },
-    include: [
-      {
-        model: Reservation,
-      },
-    ],
-  });
+  // const openDiningTables = await DiningTable.findAll({
+  //   where: {
+  //     restaurantId: restaurant2.id,
+  //     isOccupied: false,
+  //     '$reservations.reservedSeating.diningTableId$': { [Op.eq]: null },
+  //   },
+  //   include: [
+  //     {
+  //       model: Reservation,
+  //     },
+  //   ],
+  // });
   // console.log(JSON.stringify(openDiningTables, null, 2));
   // console.log(await ReservedSeating.findAll({include: [DiningTable]}))
   // console.log(Object.keys(Reservation.prototype))

@@ -56,6 +56,8 @@ include: DiningTable
     restaurantId: reservation.restaurantId
   }})
 await oldDiningTable.update({isOccupied: false});
+await oldDiningTable.save();
+
 await ReservedSeating.destroy({
   where: {
     reservationId: reservation.id,
