@@ -321,8 +321,8 @@ for(let i =0; i< restaurants.length; i++){
 
   await restaurant1.addDiningTable(r1DT1);
   await restaurant1.addDiningTable(r1DT2);
-  await restaurant2.addDiningTable(r2DT1);
-  await restaurant2.addDiningTable(r2DT2);
+  await restaurant3.addDiningTable(r2DT1);
+  await restaurant3.addDiningTable(r2DT2);
 
   // Creating Cuisines
   const cuisines = await Promise.all([
