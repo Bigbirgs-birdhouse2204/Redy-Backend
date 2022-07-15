@@ -292,11 +292,25 @@ async function seed() {
   // Adding Dining Tables to Restaurants
 
 for(let i =0; i< restaurants.length; i++){
- let DT1 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
- let DT2 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
- let DT3 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
- let DT4 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
- let DT5 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+  let DT1
+  let DT2
+  let DT3
+  let DT4
+  let DT5
+  if(i === 1){
+     DT1 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT2 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT3 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT4 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT5 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+  } else{
+
+     DT1 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT2 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT3 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT4 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT5 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+  }
 
   await restaurants[i].addDiningTable(DT1);
   await restaurants[i].addDiningTable(DT2);
