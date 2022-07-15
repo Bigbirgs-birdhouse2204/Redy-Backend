@@ -51,20 +51,32 @@ const reservation = await Reservation.findOne({where:{
 include: DiningTable
 });
  if(reservation){
+const occupiedSeat = await ReservedSeating.findOne({where: {
+  reservationId: reservation.id
+}} )
+if(occupiedSeat){
 
   const oldDiningTable = await DiningTable.findOne({where:{
-    restaurantId: reservation.restaurantId
-  }})
-await oldDiningTable.update({isOccupied: false});
-await oldDiningTable.save();
+    id: occupiedSeat.diningTableId,
 
-await ReservedSeating.destroy({
+  }});
+  if(oldDiningTable){
+    await oldDiningTable.update({isOccupied: false});
+    await oldDiningTable.save();
+    await ReservedSeating.destroy({
+      where: {
+        reservationId: reservation.id,
+        diningTableId: oldDiningTable.id,
+      },
+    });
+  }
+}
+
+await Reservation.destroy({
   where: {
-    reservationId: reservation.id,
-    diningTableId: oldDiningTable.id,
+    userId: user.id,
   },
 });
-await reservation.destroy();
 
  }
 
