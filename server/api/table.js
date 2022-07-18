@@ -23,6 +23,18 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.get('/all/restaurant/:restaurantId', async (req, res, next) => {
+  try {
+    const singleTable = await DiningTable.findAll({
+      where: { restaurantId: req.params.restaurantId},
+    });
+
+    res.json(singleTable);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/restaurant/:restaurantId', async (req, res, next) => {
   try {
     const singleTable = await DiningTable.findAll({

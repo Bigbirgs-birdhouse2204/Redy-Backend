@@ -13,7 +13,7 @@ const {
     User,
   },
 } = require('../server/db');
-const { Op, col, where } = require('sequelize');
+// const { Op, col, where } = require('sequelize');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -290,10 +290,48 @@ async function seed() {
   const r2DT2 = diningTables[3];
 
   // Adding Dining Tables to Restaurants
+
+for(let i =0; i< restaurants.length; i++){
+  let DT1
+  let DT2
+  let DT3
+  let DT4
+  let DT5
+  if(i === 1){
+     DT1 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT2 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT3 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT4 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT5 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+  }else if(i === 8) {
+    // NOMO SOHO Should only have 4 dining tables available
+    DT1 = await DiningTable.create({ isOccupied: true, seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+    DT2 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+    DT3 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+    DT4 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+    DT5 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+
+
+  } else{
+
+     DT1 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT2 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT3 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT4 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+     DT5 = await DiningTable.create({ seats: Math.floor(Math.random() * (12 - 2 + 1)) + 2 })
+  }
+
+  await restaurants[i].addDiningTable(DT1);
+  await restaurants[i].addDiningTable(DT2);
+  await restaurants[i].addDiningTable(DT3);
+  await restaurants[i].addDiningTable(DT4);
+  await restaurants[i].addDiningTable(DT5);
+}
+
   await restaurant1.addDiningTable(r1DT1);
   await restaurant1.addDiningTable(r1DT2);
-  await restaurant2.addDiningTable(r2DT1);
-  await restaurant2.addDiningTable(r2DT2);
+  await restaurant3.addDiningTable(r2DT1);
+  await restaurant3.addDiningTable(r2DT2);
 
   // Creating Cuisines
   const cuisines = await Promise.all([
@@ -342,14 +380,18 @@ async function seed() {
     partySize: 4,
   });
   await cCodyRes.setRestaurant(restaurant1);
+  await r1DT1.update({isOccupied: true});
+  await r1DT1.save();
   await cCodyRes.addDiningTable(r1DT1);
-
   // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
-  const cMurphyRes = await customerMurphy.createReservation({
-    status: 'WaitList',
-    partySize: 6,
-  });
-  await cMurphyRes.setRestaurant(restaurant2);
+  // const cMurphyRes = await customerMurphy.createReservation({
+  //   status: 'WaitList',
+  //   partySize: 6,
+  // });
+  // await cMurphyRes.setRestaurant(restaurant3);
+
+  // await cCodyRes.destroy();
+  // await cMurphyRes.destroy();
 
   // await cMurphyRes.update({ status: "Booked" });
 
@@ -357,44 +399,44 @@ async function seed() {
 
   // Admin Cody will book a table for a party of 7 at restaurant2 successfuilly
   // (reserves dining table 2 at restaurant2), then leaves, freeing the table
-  const aCodyRes = await adminCody.createReservation({
-    status: 'Booked',
-    partySize: 7,
-  });
-  await aCodyRes.setRestaurant(restaurant2);
-  await aCodyRes.addDiningTable(r2DT2);
-  let bookedSeatings = await ReservedSeating.findAll();
+  // const aCodyRes = await adminCody.createReservation({
+  //   status: 'Booked',
+  //   partySize: 7,
+  // });
+  // await aCodyRes.setRestaurant(restaurant2);
+  // await aCodyRes.addDiningTable(r2DT2);
+  // let bookedSeatings = await ReservedSeating.findAll();
   // should show 2 entries
   // console.log(`Booked seats Before Admin Cody leaves: `, bookedSeatings.length);
 
   // Admin Cody's Table is now freed up
-  await aCodyRes.update({ status: 'Completed' });
-  await ReservedSeating.destroy({
-    where: {
-      reservationId: aCodyRes.id,
-    },
-  });
-  bookedSeatings = await ReservedSeating.findAll();
+  // await aCodyRes.update({ status: 'Completed' });
+  // await ReservedSeating.destroy({
+  //   where: {
+  //     reservationId: aCodyRes.id,
+  //   },
+  // });
+  // bookedSeatings = await ReservedSeating.findAll();
 
   // should show 1 entry
   // console.log(`Booked seats after Admin Cody Left: `, bookedSeatings.length);
 
   // App will pull up available Dining Tables from restuarant1 that Users can book
-  const openDiningTables = await DiningTable.findAll({
-    where: {
-      restaurantId: restaurant2.id,
-      isOccupied: false,
-      '$reservations.reservedSeating.diningTableId$': { [Op.eq]: null },
-    },
-    include: [
-      {
-        model: Reservation,
-      },
-    ],
-  });
+  // const openDiningTables = await DiningTable.findAll({
+  //   where: {
+  //     restaurantId: restaurant2.id,
+  //     isOccupied: false,
+  //     '$reservations.reservedSeating.diningTableId$': { [Op.eq]: null },
+  //   },
+  //   include: [
+  //     {
+  //       model: Reservation,
+  //     },
+  //   ],
+  // });
   // console.log(JSON.stringify(openDiningTables, null, 2));
   // console.log(await ReservedSeating.findAll({include: [DiningTable]}))
-  // console.log(Object.keys(Restaurant.prototype))
+  // console.log(Object.keys(Reservation.prototype))
 
   console.log(`seeded successfully`);
 }

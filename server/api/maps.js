@@ -32,7 +32,10 @@ router.get("/", async (req, res, next) => {
       };
     });
     res.json(maps);
+<<<<<<< HEAD
     // res.json(data.results);
+=======
+>>>>>>> bdda62941558c9bf8d82a1a980218ce051187d96
   } catch (err) {
     next(err);
   }

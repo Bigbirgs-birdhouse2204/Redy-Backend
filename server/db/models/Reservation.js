@@ -26,6 +26,13 @@ const Reservation = db.define('reservation', {
       len: 1,
     },
   },
+  openingTime: {
+    type: Sequelize.TIME,
+    allowNull: true,
+    // set (valueToBeSet) {
+    //     this.setDataValue('openingTime', valueToBeSet)
+    // }
+  },
   // diningTableId: {
   //   type: Sequelize.INTEGER,
   //   // in cases where a user is on a wait list

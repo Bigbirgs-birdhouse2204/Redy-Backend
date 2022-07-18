@@ -83,6 +83,7 @@ router.get('/me', async (req, res, next) => {
       firstName: user.firstName,
       lastName: user.lastName,
       phone: user.phone,
+      id: user.id
     });
   } catch (ex) {
     next(ex);
