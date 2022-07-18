@@ -13,7 +13,7 @@ const {
     User,
   },
 } = require('../server/db');
-const { Op, col, where } = require('sequelize');
+// const { Op, col, where } = require('sequelize');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -380,18 +380,18 @@ for(let i =0; i< restaurants.length; i++){
     partySize: 4,
   });
   await cCodyRes.setRestaurant(restaurant1);
-  // await r1DT1.update({isOccupied: true});
-  // await r1DT1.save();
-  // await cCodyRes.addDiningTable(r1DT1);
+  await r1DT1.update({isOccupied: true});
+  await r1DT1.save();
+  await cCodyRes.addDiningTable(r1DT1);
   // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
-  const cMurphyRes = await customerMurphy.createReservation({
-    status: 'WaitList',
-    partySize: 6,
-  });
-  await cMurphyRes.setRestaurant(restaurant3);
+  // const cMurphyRes = await customerMurphy.createReservation({
+  //   status: 'WaitList',
+  //   partySize: 6,
+  // });
+  // await cMurphyRes.setRestaurant(restaurant3);
 
-  await cCodyRes.destroy();
-  await cMurphyRes.destroy();
+  // await cCodyRes.destroy();
+  // await cMurphyRes.destroy();
 
   // await cMurphyRes.update({ status: "Booked" });
 
