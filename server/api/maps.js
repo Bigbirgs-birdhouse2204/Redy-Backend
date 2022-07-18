@@ -1,9 +1,9 @@
-const router = require('express').Router();
-const axios = require('axios');
+const router = require("express").Router();
+const axios = require("axios");
 module.exports = router;
-require('dotenv').config();
+require("dotenv").config();
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     // const lat = req.body.lat
     // const long = req.body.long
@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
     const long = -74.006238;
     const radius = 1609;
     let config = {
-      method: 'get',
+      method: "get",
       url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${long}&radius=${radius}&type=restaurant&key=${process.env.API_KEY}`,
       headers: {},
     };
@@ -32,6 +32,10 @@ router.get('/', async (req, res, next) => {
       };
     });
     res.json(maps);
+<<<<<<< HEAD
+    // res.json(data.results);
+=======
+>>>>>>> bdda62941558c9bf8d82a1a980218ce051187d96
   } catch (err) {
     next(err);
   }
