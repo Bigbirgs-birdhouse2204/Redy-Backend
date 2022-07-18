@@ -32,7 +32,6 @@ router.get("/business/:restaurantId", async (req, res, next) => {
     next(err);
   }
 });
-
 // this is the route to get all reservations for specific regular user
 router.get("/user/:userid", async (req, res, next) => {
   try {
@@ -45,7 +44,6 @@ router.get("/user/:userid", async (req, res, next) => {
     next(err);
   }
 });
-
 router.get("/:id", async (req, res, next) => {
   try {
     const singleRestaurant = await Reservation.findByPk(req.params.id);
@@ -124,5 +122,4 @@ router.post("/waitlist", async (req, res, next) => {
     next(error);
   }
 });
-
 
