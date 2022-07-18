@@ -375,20 +375,23 @@ for(let i =0; i< restaurants.length; i++){
   // Creating Reservations
 
   // customer Cody successfully books a reservation at restuarant1 at a table of 4
-  // const cCodyRes = await customerCody.createReservation({
-  //   status: 'Booked',
-  //   partySize: 4,
-  // });
-  // await cCodyRes.setRestaurant(restaurant1);
+  const cCodyRes = await customerCody.createReservation({
+    status: 'Booked',
+    partySize: 4,
+  });
+  await cCodyRes.setRestaurant(restaurant1);
   // await r1DT1.update({isOccupied: true});
   // await r1DT1.save();
   // await cCodyRes.addDiningTable(r1DT1);
-  // // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
-  // const cMurphyRes = await customerMurphy.createReservation({
-  //   status: 'WaitList',
-  //   partySize: 6,
-  // });
-  // await cMurphyRes.setRestaurant(restaurant3);
+  // Customer Murphy wants to book a table at restaurant2, but has to wait for a table to free up
+  const cMurphyRes = await customerMurphy.createReservation({
+    status: 'WaitList',
+    partySize: 6,
+  });
+  await cMurphyRes.setRestaurant(restaurant3);
+
+  await cCodyRes.destroy();
+  await cMurphyRes.destroy();
 
   // await cMurphyRes.update({ status: "Booked" });
 
